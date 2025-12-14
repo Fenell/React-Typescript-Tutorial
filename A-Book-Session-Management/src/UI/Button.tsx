@@ -2,8 +2,8 @@ import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 import { Link, type LinkProps } from "react-router";
 
 interface BaseProps {
-  chilldren: ReactNode;
-  textOnly: boolean;
+  children: ReactNode;
+  textOnly?: boolean;
 }
 
 type ButtonProps = ComponentPropsWithoutRef<"button"> &
@@ -19,24 +19,24 @@ const isRouteLink = (
 
 const Button = (props: ButtonProps | ButtonLinkProps) => {
   if (isRouteLink(props)) {
-    const { textOnly, chilldren, ...otherProps } = props;
+    const { textOnly, children, ...otherProps } = props;
     return (
       <Link
         className={`button ${textOnly ? "button--text-only" : ""}`}
         {...otherProps}
       >
-        {chilldren}
+        {children}
       </Link>
     );
   }
-  const { textOnly, chilldren, ...otherProps } = props;
+  const { textOnly, children, ...otherProps } = props;
 
   return (
     <button
       className={`button ${textOnly ? "button--text-only" : ""}`}
       {...otherProps}
     >
-      {chilldren}
+      {children}
     </button>
   );
 };
