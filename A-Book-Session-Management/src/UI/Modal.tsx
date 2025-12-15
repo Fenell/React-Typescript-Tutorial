@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 
-type ModalHandle = {
+export type ModalHandle = {
   open: () => void;
 };
 
@@ -25,7 +25,9 @@ const Modal = forwardRef<ModalHandle, ModalProps>(
     });
 
     return createPortal(
-      <dialog onClose={onClose}>{children}</dialog>,
+      <dialog ref={dialog} onClose={onClose} className="modal">
+        {children}
+      </dialog>,
       document.getElementById("modal")!
     );
   }
